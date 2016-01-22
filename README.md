@@ -2,9 +2,16 @@
 
 Dockerized **[duplicity](http://duplicity.nongnu.org/)** backup tool.
 
-### Usage
+Features of this Docker image:
 
-#### Backup to Google Cloud Storage example
+  * **Small**: Built using [alpine](https://hub.docker.com/_/alpine/).
+  * **Simple**: Most common cases are explained below and require minimal setup.
+  * **Secure**: Runs as any user (so pic any random UID or run as your user which avoids to run as `root` which isn't the safest).
+
+
+## Usage
+
+### Backup to Google Cloud Storage example
 
 **[Google Cloud Storage](https://cloud.google.com/storage/)** *nearline* [costs about $0.01/GB/Month](https://cloud.google.com/storage/pricing).
 
@@ -25,7 +32,12 @@ You should now have a `~/.boto` looking like:
 
 Now you're ready to perform a **backup**:
 
-    $ docker run --rm --user $UID -v /:/data:ro -v ~/.boto:/home/duplicity/.boto:ro -e PASSPHRASE=P4ssw0rd duplicity duplicity /data gs://my-bucket-name/some_dir
+    $ docker run --rm --user $UID \
+          -e PASSPHRASE=P4ssw0rd \
+          -v /:/data:ro \
+          -v ~/.boto:/home/duplicity/.boto:ro \
+          wernight/duplicity \
+          duplicity /data gs://my-bucket-name/some_dir
 
 To **restore**, you'll need:
 
@@ -35,7 +47,7 @@ To **restore**, you'll need:
 See also the [note on Google Cloud Storage](http://duplicity.nongnu.org/duplicity.1.html#sect15).
 
 
-#### Backup to Google Drive example
+### Backup to Google Drive example
 
 **[Google Drive](https://drive.google.com/)** offers [15GB for free](https://support.google.com/drive/answer/2375123).
 
@@ -44,24 +56,32 @@ See also the [note on Google Cloud Storage](http://duplicity.nongnu.org/duplicit
  1. Follow notes [on Pydrive Backend](http://duplicity.nongnu.org/duplicity.1.html#sect20) to generate a P12 credential file (call it `pydriveprivatekey.p12`) and note also the associated service account email generated (e.g. `duplicity@developer.gserviceaccount.com`).
  2. Convert P12 to PEM:
 
-        $ docker run --rm -i --user $UID -v $PWD/pydriveprivatekey.p12:/pydriveprivatekey.p12:ro wernight/duplicity openssl pkcs12 -in /pydriveprivatekey.p12 -nodes -nocerts > pydriveprivatekey.pem
+        $ docker run --rm -i --user $UID \
+              -v $PWD/pydriveprivatekey.p12:/pydriveprivatekey.p12:ro \
+              wernight/duplicity \
+              openssl pkcs12 -in /pydriveprivatekey.p12 -nodes -nocerts >pydriveprivatekey.pem
         Enter Import Password: notasecret
 
 Now you're ready to perform a **backup**:
 
-    $ docker run --rm --user $UID -v /:/data:ro -e PASSPHRASE=P4ssw0rd -e GOOGLE_DRIVE_ACCOUNT_KEY=$(cat pydriveprivatekey.pem) duplicity duplicity /data pydrive://duplicity@developer.gserviceaccount.com/some_dir
+    $ docker run --rm --user $UID \
+          -e PASSPHRASE=P4ssw0rd \
+          -e GOOGLE_DRIVE_ACCOUNT_KEY=$(cat pydriveprivatekey.pem) \
+          -v /:/data:ro \
+          wernight/duplicity \
+          duplicity /data pydrive://duplicity@developer.gserviceaccount.com/some_dir
 
 To **restore**, you'll need:
 
   * Regenerate a PEM file (or keep it somewhere).
   * The `PASSPHRASE` you've used.
 
-#### Backup via rsync example
+### Backup via rsync example
 
 **TODO**
 
 
-#### More help
+### More help
 
 See also [duplicity man](http://duplicity.nongnu.org/duplicity.1.html) page and you can also do:
 
@@ -69,4 +89,4 @@ See also [duplicity man](http://duplicity.nongnu.org/duplicity.1.html) page and 
 
 ## Feedbacks
 
-Report issues/questions/feature requests on [GitHub Issues][https://github.com/wernight/docker-duplicity/issues].
+Report issues/questions/feature requests on [GitHub Issues](https://github.com/wernight/docker-duplicity/issues).
