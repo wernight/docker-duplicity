@@ -2,13 +2,11 @@ Dockerize [duplicity](http://duplicity.nongnu.org/) backup tool.
 
 ### Usage
 
-#### Backup via rsync
+#### Backup via rsync Example
 
 **TODO**
 
 #### Backup to Google Drive Example
-
-**WORK IN PROGRESS**
 
 First follow notes [on Pydrive Backend](http://duplicity.nongnu.org/duplicity.1.html#sect20) to generate a P12 credential file (call it `pydriveprivatekey.p12`) and note also the associated service account email generated (e.g. `duplicity@developer.gserviceaccount.com`).
 
