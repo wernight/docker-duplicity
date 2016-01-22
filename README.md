@@ -22,7 +22,7 @@ To restore, you'll need:
   * Keep keys or regenerate them to access your Google Cloud Storage.
   * The `PASSPHRASE` you've used.
 
-**TODO** see [note on Google Cloud Storage](http://duplicity.nongnu.org/duplicity.1.html#sect15).
+See also the [note on Google Cloud Storage](http://duplicity.nongnu.org/duplicity.1.html#sect15).
 
 
 #### Backup to Google Drive example
