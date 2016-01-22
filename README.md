@@ -1,3 +1,5 @@
+[![](https://badge.imagelayers.io/wernight/duplicity:latest.svg)](https://imagelayers.io/?images=wernight/duplicity:latest 'Get your own badge on imagelayers.io')
+
 Dockerized **[duplicity](http://duplicity.nongnu.org/)** backup tool.
 
 ### Usage
@@ -64,3 +66,7 @@ To **restore**, you'll need:
 See also [duplicity man](http://duplicity.nongnu.org/duplicity.1.html) page and you can also do:
 
     $ docker run --rm wernight/duplicity duplicity --help
+
+## Feedbacks
+
+Report issues/questions/feature requests on [GitHub Issues][https://github.com/wernight/docker-duplicity/issues].
