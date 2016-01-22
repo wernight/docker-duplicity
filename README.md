@@ -1,2 +1,1 @@
-# docker-duplicity
-Dockerize "duplicity" backup tool.
+Dockerize [duplicity](http://duplicity.nongnu.org/) backup tool.
