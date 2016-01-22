@@ -1,4 +1,4 @@
-Dockerize [duplicity](http://duplicity.nongnu.org/) backup tool.
+Dockerized [duplicity](http://duplicity.nongnu.org/) backup tool.
 
 ### Usage
 
