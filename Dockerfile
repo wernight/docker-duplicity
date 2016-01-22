@@ -1,6 +1,6 @@
 FROM alpine:3.3
 
-RUN apk add --update duplicity py-pip \
+RUN apk add --update duplicity openssl py-crypto py-pip \
  && pip install pydrive==1.0.1 \
  && apk del --purge py-pip \
  && rm /var/cache/apk/* \
