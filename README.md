@@ -2,11 +2,14 @@ Dockerized [duplicity](http://duplicity.nongnu.org/) backup tool.
 
 ### Usage
 
-#### Backup to Google Drive Example
+#### Backup to Google Drive example
+
+[Google Drive](https://drive.google.com/) offers [15GB for free](https://support.google.com/drive/answer/2375123).
 
 Set up:
 
- 1. Follow notes [on Pydrive Backend](http://duplicity.nongnu.org/duplicity.1.html#sect20) to generate a P12 credential file (call it `pydriveprivatekey.p12`) and note also the associated service account email generated (e.g. `duplicity@developer.gserviceaccount.com`).
+ 1. 
+ 2. Follow notes [on Pydrive Backend](http://duplicity.nongnu.org/duplicity.1.html#sect20) to generate a P12 credential file (call it `pydriveprivatekey.p12`) and note also the associated service account email generated (e.g. `duplicity@developer.gserviceaccount.com`).
  2. Convert P12 to PEM:
 
         $ docker run --rm -i --user $UID -v $PWD/pydriveprivatekey.p12:/pydriveprivatekey.p12:ro wernight/duplicity openssl pkcs12 -in /pydriveprivatekey.p12 -nodes -nocerts > pydriveprivatekey.pem
@@ -21,12 +24,19 @@ To restore, you'll need:
   * Regenerate a PEM file (or keep it somewhere)
   * The `PASSPHRASE` you've used.
 
-#### Backup via rsync Example
+#### Backup to Google Cloud Storage example
+
+[Google Cloud Storage](https://cloud.google.com/storage/) *nearline* [costs about $0.01/GB/Month](https://cloud.google.com/storage/pricing).
+
+**TODO** see [note on Google Cloud Storage](http://duplicity.nongnu.org/duplicity.1.html#sect15).
+
+
+#### Backup via rsync example
 
 **TODO**
 
 
-#### Help
+#### More help
 
 See also [duplicity man](http://duplicity.nongnu.org/duplicity.1.html) page and you can also do:
 
