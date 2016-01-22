@@ -1,4 +1,4 @@
-Dockerized [duplicity](http://duplicity.nongnu.org/) backup tool.
+Dockerized **[duplicity](http://duplicity.nongnu.org/)** backup tool.
 
 ### Usage
 
@@ -15,7 +15,7 @@ Set up:
 
 Now you're ready to perform a backup:
 
-    $ docker run --rm --user $UID -v /:/data:ro -e PASSPHRASE=P4ssw0rd -e GS_ACCESS_KEY=MYGOOGLEACCESSKEY -e GS_SECRET_ACCESS_KEY=SomeVeryLongAccessKey duplicity duplicity /data gs://my-bucket-name/some_dir
+    $ docker run --rm --user $UID -v /:/data:ro -e PASSPHRASE=P4ssw0rd -e GS_ACCESS_KEY_ID=MYGOOGLEACCESSKEY -e GS_SECRET_ACCESS_KEY=SomeVeryLongAccessKey duplicity duplicity /data gs://my-bucket-name/some_dir
 
 To restore, you'll need:
 
