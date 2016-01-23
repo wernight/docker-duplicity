@@ -6,7 +6,7 @@ Features of this Docker image:
 
   * **Small**: Built using [alpine](https://hub.docker.com/_/alpine/).
   * **Simple**: Most common cases are explained below and require minimal setup.
-  * **Secure**: Runs as any user (so pic any random UID or run as your user which avoids to run as `root` which isn't the safest).
+  * **Secure**: Runs non-root by default (use randomly chosen UID `1896`), and meant to run as any user.
 
 
 ## Usage
@@ -77,7 +77,20 @@ To **restore**, you'll need:
 
 ### Backup via rsync example
 
-**TODO**
+Supposing you've an **SSH** access to some machine, you can:
+
+    $ docker run --rm -it --user root \
+          -e PASSPHRASE=P4ssw0rd \
+          -v /:/data:ro \
+          -v ~/.ssh/id_rsa:/id_rsa:ro \
+          -v ~/.ssh/known_hosts:/etc/ssh/ssh_known_hosts:ro \
+          wernight/duplicity \
+          duplicity --rsync-options='-e "ssh -i /id_rsa"' /data rsync://user@example.com/some_dir
+
+Note: We're running here as `root` to have access to `~/.ssh` and also because ssh does not
+allow to use a random (non-locally existing) UID. To make it safer, you can copy your `~/.ssh`
+and `chown 1896` it (that is `duplicity` UID within the container). If you know a another way to avoid
+the "No user exists for uid" check, please let me know.
 
 
 ### More help
