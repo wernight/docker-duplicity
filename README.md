@@ -11,6 +11,18 @@ Features of this Docker image:
 
 ## Usage
 
+In general you'd want:
+
+  * Set environment variable `PASSPHRASE`, unless you want to type it manually in the prompt (remember then to add `-it`).
+  * Mount `/home/duplicity/.gnupg` as writable somewhere (that directory is used to validate incremental backups and shouldn't be necessary to restore your backup if you follows steps below).
+  * Mount what you want to backup or where you want to restore a backup.
+  * May have to mount a few other files for authentication (see examples below).
+
+For the general command-line syntax, do:
+
+    $ docker run --rm wernight/duplicity duplicity --help
+
+
 ### Backup to Google Cloud Storage example
 
 **[Google Cloud Storage](https://cloud.google.com/storage/)** *nearline* [costs about $0.01/GB/Month](https://cloud.google.com/storage/pricing).
@@ -33,8 +45,9 @@ Now you're ready to perform a **backup**:
 
     $ docker run --rm --user $UID \
           -e PASSPHRASE=P4ssw0rd \
-          -v /:/data:ro \
+          -v $PWD/.gnupg:/home/duplicity/.gnupg \
           -v ~/.boto:/home/duplicity/.boto:ro \
+          -v /:/data:ro \
           wernight/duplicity \
           duplicity /data gs://my-bucket-name/some_dir
 
@@ -66,6 +79,7 @@ Now you're ready to perform a **backup**:
     $ docker run --rm --user $UID \
           -e PASSPHRASE=P4ssw0rd \
           -e GOOGLE_DRIVE_ACCOUNT_KEY=$(cat pydriveprivatekey.pem) \
+          -v $PWD/.gnupg:/home/duplicity/.gnupg \
           -v /:/data:ro \
           wernight/duplicity \
           duplicity /data pydrive://duplicity@developer.gserviceaccount.com/some_dir
@@ -81,9 +95,10 @@ Supposing you've an **SSH** access to some machine, you can:
 
     $ docker run --rm -it --user root \
           -e PASSPHRASE=P4ssw0rd \
-          -v /:/data:ro \
+          -v $PWD/.gnupg:/home/duplicity/.gnupg \
           -v ~/.ssh/id_rsa:/id_rsa:ro \
           -v ~/.ssh/known_hosts:/etc/ssh/ssh_known_hosts:ro \
+          -v /:/data:ro \
           wernight/duplicity \
           duplicity --rsync-options='-e "ssh -i /id_rsa"' /data rsync://user@example.com/some_dir
 
@@ -104,11 +119,11 @@ Now you should be able to run duplicity almost as if it were installed, example:
     $ PASSPHRASE=123456 duplicity --progress /mnt rsync://user@example.com/some_dir
 
 
-### More help
+## See also
 
-See also [duplicity man](http://duplicity.nongnu.org/duplicity.1.html) page and you can also do:
+  * [duplicity man](http://duplicity.nongnu.org/duplicity.1.html) page
+  * [How To Use Duplicity with GPG to Securely Automate Backups on Ubuntu | DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-use-duplicity-with-gpg-to-securely-automate-backups-on-ubuntu)
 
-    $ docker run --rm wernight/duplicity duplicity --help
 
 ## Feedbacks
 
