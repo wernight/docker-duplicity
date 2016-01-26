@@ -93,6 +93,17 @@ and `chown 1896` it (that is `duplicity` UID within the container). If you know 
 the "No user exists for uid" check, please let me know.
 
 
+### Alias
+
+Here is a simple alias that should work in most cases:
+
+    $ alias duplicity='docker run --rm --user=root -v ~/.ssh/id_rsa:/home/duplicity/.ssh/id_rsa:ro -v ~/.boto:/home/duplicity/.boto:ro -v ~/.gnupg:/home/duplicity/.gnupg -v /:/mnt:ro -e PASSPHRASE=$PASSPHRASE wernight/duplicity duplicity $@'
+
+Now you should be able to run duplicity almost as if it were installed, example:
+
+    $ PASSPHRASE=123456 duplicity --progress /mnt rsync://user@example.com/some_dir
+
+
 ### More help
 
 See also [duplicity man](http://duplicity.nongnu.org/duplicity.1.html) page and you can also do:
