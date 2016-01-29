@@ -17,6 +17,7 @@ In general you'd want:
   * Mount `/home/duplicity/.gnupg` as writable somewhere (that directory is used to validate incremental backups and shouldn't be necessary to restore your backup if you follows steps below).
   * Mount what you want to backup or where you want to restore a backup.
   * May have to mount a few other files for authentication (see examples below).
+  * Probably specify `--allow-source-mismatch` because Docker has a random host for each containe..
 
 For the general command-line syntax, do:
 
@@ -49,7 +50,7 @@ Now you're ready to perform a **backup**:
           -v ~/.boto:/home/duplicity/.boto:ro \
           -v /:/data:ro \
           wernight/duplicity \
-          duplicity /data gs://my-bucket-name/some_dir
+          duplicity --allow-source-mismatch /data gs://my-bucket-name/some_dir
 
 To **restore**, you'll need:
 
@@ -82,7 +83,7 @@ Now you're ready to perform a **backup**:
           -v $PWD/.gnupg:/home/duplicity/.gnupg \
           -v /:/data:ro \
           wernight/duplicity \
-          duplicity /data pydrive://duplicity@developer.gserviceaccount.com/some_dir
+          duplicity --allow-source-mismatch /data pydrive://duplicity@developer.gserviceaccount.com/some_dir
 
 To **restore**, you'll need:
 
@@ -100,7 +101,7 @@ Supposing you've an **SSH** access to some machine, you can:
           -v ~/.ssh/known_hosts:/etc/ssh/ssh_known_hosts:ro \
           -v /:/data:ro \
           wernight/duplicity \
-          duplicity --rsync-options='-e "ssh -i /id_rsa"' /data rsync://user@example.com/some_dir
+          duplicity --allow-source-mismatch --rsync-options='-e "ssh -i /id_rsa"' /data rsync://user@example.com/some_dir
 
 Note: We're running here as `root` to have access to `~/.ssh` and also because ssh does not
 allow to use a random (non-locally existing) UID. To make it safer, you can copy your `~/.ssh`
