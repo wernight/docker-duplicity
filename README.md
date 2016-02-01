@@ -11,18 +11,19 @@ Features of this Docker image:
 
 ## Usage
 
-In general you'd want:
-
-  * Set environment variable `PASSPHRASE`, unless you want to type it manually in the prompt (remember then to add `-it`).
-  * Mount `/home/duplicity/.cache/duplicity` as writable somewhere (if not cached, [duplicity will have to recreate it from the remote repository which may require decrypting the backup contents](http://duplicity.nongnu.org/duplicity.1.html#sect5)).
-  * Mount `/home/duplicity/.gnupg` as writable somewhere (that directory is used to validate incremental backups and shouldn't be necessary to restore your backup if you follows steps below).
-  * Mount what you want to backup or where you want to restore a backup.
-  * May have to mount a few other files for authentication (see examples below).
-  * Probably specify `--allow-source-mismatch` because Docker has a random host for each containe..
-
 For the general command-line syntax, do:
 
     $ docker run --rm wernight/duplicity duplicity --help
+
+In general you...
+
+  * Must mount what you want to backup or where you want to restore a backup.
+  * Should mount `/home/duplicity/.cache/duplicity` as writable somewhere (if not cached, [duplicity will have to recreate it from the remote repository which may require decrypting the backup contents](http://duplicity.nongnu.org/duplicity.1.html#sect5)).
+  * Should mount `/home/duplicity/.gnupg` as writable somewhere (that directory is used to validate incremental backups and shouldn't be necessary to restore your backup if you follows steps below).
+  * Should specify duplicity flag `--allow-source-mismatch` because Docker has a random host for each container.
+  * Could set environment variable `PASSPHRASE`, unless you want to type it manually in the prompt (remember then to add `-it`).
+  * May have to mount a few other files for authentication (see examples below).
+
 
 
 ### Backup to Google Cloud Storage example
