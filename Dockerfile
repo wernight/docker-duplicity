@@ -6,11 +6,13 @@ RUN apk add --update duplicity openssh openssl py-crypto py-pip rsync \
  && rm /var/cache/apk/* \
  && adduser -D -u 1896 duplicity \
  && mkdir -p /home/duplicity/.cache/duplicity \
- && chmod go+rwx /home/duplicity/
+ && mkdir -p /home/duplicity/.gnupg \
+ && chmod -R go+rwx /home/duplicity/
 
 ENV HOME=/home/duplicity
 
 VOLUME /home/duplicity/.cache/duplicity
+VOLUME /home/duplicity/.gnupg
 
 USER duplicity
  

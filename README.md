@@ -14,6 +14,7 @@ Features of this Docker image:
 In general you'd want:
 
   * Set environment variable `PASSPHRASE`, unless you want to type it manually in the prompt (remember then to add `-it`).
+  * Mount `/home/duplicity/.cache/duplicity` as writable somewhere (if not cached, [duplicity will have to recreate it from the remote repository which may require decrypting the backup contents](http://duplicity.nongnu.org/duplicity.1.html#sect5)).
   * Mount `/home/duplicity/.gnupg` as writable somewhere (that directory is used to validate incremental backups and shouldn't be necessary to restore your backup if you follows steps below).
   * Mount what you want to backup or where you want to restore a backup.
   * May have to mount a few other files for authentication (see examples below).
@@ -46,6 +47,7 @@ Now you're ready to perform a **backup**:
 
     $ docker run --rm --user $UID \
           -e PASSPHRASE=P4ssw0rd \
+          -v $PWD/.cache:/home/duplicity/.cache/duplicity \
           -v $PWD/.gnupg:/home/duplicity/.gnupg \
           -v ~/.boto:/home/duplicity/.boto:ro \
           -v /:/data:ro \
@@ -80,6 +82,7 @@ Now you're ready to perform a **backup**:
     $ docker run --rm --user $UID \
           -e PASSPHRASE=P4ssw0rd \
           -e GOOGLE_DRIVE_ACCOUNT_KEY=$(cat pydriveprivatekey.pem) \
+          -v $PWD/.cache:/home/duplicity/.cache/duplicity \
           -v $PWD/.gnupg:/home/duplicity/.gnupg \
           -v /:/data:ro \
           wernight/duplicity \
@@ -96,6 +99,7 @@ Supposing you've an **SSH** access to some machine, you can:
 
     $ docker run --rm -it --user root \
           -e PASSPHRASE=P4ssw0rd \
+          -v $PWD/.cache:/home/duplicity/.cache/duplicity \
           -v $PWD/.gnupg:/home/duplicity/.gnupg \
           -v ~/.ssh/id_rsa:/id_rsa:ro \
           -v ~/.ssh/known_hosts:/etc/ssh/ssh_known_hosts:ro \
