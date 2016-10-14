@@ -26,7 +26,7 @@ In general you...
 
 
 
-### Backup to Google Cloud Storage example
+### Backup to **Google Cloud Storage** example
 
 **[Google Cloud Storage](https://cloud.google.com/storage/)** *nearline* [costs about $0.01/GB/Month](https://cloud.google.com/storage/pricing).
 
@@ -57,13 +57,20 @@ Now you're ready to perform a **backup**:
 
 To **restore**, you'll need:
 
-  * Keep keys or regenerate them to access your Google Cloud Storage.
+  * Keep `.boto` or regenerate it to access your Google Cloud Storage.
   * The `PASSPHRASE` you've used.
 
+    $ docker run --rm --user $UID \
+          -e PASSPHRASE=P4ssw0rd \
+          -v ~/.boto:/home/duplicity/.boto:ro \
+          -v /:/data:ro \
+          wernight/duplicity \
+          duplicity gs://my-bucket-name/some_dir /data
+          
 See also the [note on Google Cloud Storage](http://duplicity.nongnu.org/duplicity.1.html#sect15).
 
 
-### Backup to Google Drive example
+### Backup to **Google Drive** example
 
 **[Google Drive](https://drive.google.com/)** offers [15GB for free](https://support.google.com/drive/answer/2375123).
 
@@ -94,7 +101,7 @@ To **restore**, you'll need:
   * Regenerate a PEM file (or keep it somewhere).
   * The `PASSPHRASE` you've used.
 
-### Backup via rsync example
+### Backup via **rsync** example
 
 Supposing you've an **SSH** access to some machine, you can:
 
@@ -128,6 +135,7 @@ Now you should be able to run duplicity almost as if it were installed, example:
 ## See also
 
   * [duplicity man](http://duplicity.nongnu.org/duplicity.1.html) page
+  * [duplicity back-up how-to - Ubuntu](https://help.ubuntu.com/community/DuplicityBackupHowto)
   * [How To Use Duplicity with GPG to Securely Automate Backups on Ubuntu | DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-use-duplicity-with-gpg-to-securely-automate-backups-on-ubuntu)
 
 
