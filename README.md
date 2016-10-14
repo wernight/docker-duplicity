@@ -1,4 +1,4 @@
-[![](https://badge.imagelayers.io/wernight/duplicity:latest.svg)](https://imagelayers.io/?images=wernight/duplicity:latest 'Get your own badge on imagelayers.io')
+[![](https://images.microbadger.com/badges/image/wernight/duplicity.svg)](https://microbadger.com/images/wernight/duplicity "Get your own image badge on microbadger.com")
 
 Dockerized **[duplicity](http://duplicity.nongnu.org/)** backup tool.
 
@@ -18,7 +18,7 @@ For the general command-line syntax, do:
 In general you...
 
   * Must mount what you want to backup or where you want to restore a backup.
-  * Should mount `/home/duplicity/.cache/duplicity` as writable somewhere (if not cached, [duplicity will have to recreate it from the remote repository which may require decrypting the backup contents](http://duplicity.nongnu.org/duplicity.1.html#sect5)).
+  * Should mount `/home/duplicity/.cache/duplicity` as writable somewhere (if not cached, [duplicity will have to recreate it from the remote repository which may require decrypting the backup contents](http://duplicity.nongnu.org/duplicity.1.html#sect5)). Note it may be quite large and contains metadata info about files you've backed up in clear text.
   * Should mount `/home/duplicity/.gnupg` as writable somewhere (that directory is used to validate incremental backups and shouldn't be necessary to restore your backup if you follows steps below).
   * Should specify duplicity flag `--allow-source-mismatch` because Docker has a random host for each container.
   * Could set environment variable `PASSPHRASE`, unless you want to type it manually in the prompt (remember then to add `-it`).

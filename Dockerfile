@@ -1,9 +1,9 @@
-FROM alpine:3.3
+FROM alpine:3.4
 
-RUN apk add --update duplicity openssh openssl py-crypto py-pip rsync \
- && pip install pydrive==1.0.1 \
+RUN set -x \
+ &&apk add --no-cache duplicity openssh openssl py-crypto py-pip rsync \
+ && pip install pydrive==1.2.1 \
  && apk del --purge py-pip \
- && rm /var/cache/apk/* \
  && adduser -D -u 1896 duplicity \
  && mkdir -p /home/duplicity/.cache/duplicity \
  && mkdir -p /home/duplicity/.gnupg \
@@ -11,8 +11,7 @@ RUN apk add --update duplicity openssh openssl py-crypto py-pip rsync \
 
 ENV HOME=/home/duplicity
 
-VOLUME /home/duplicity/.cache/duplicity
-VOLUME /home/duplicity/.gnupg
+VOLUME ["/home/duplicity/.cache/duplicity", "/home/duplicity/.gnupg"]
 
 USER duplicity
  
