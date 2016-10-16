@@ -33,7 +33,7 @@ In general you...
 **Set up**:
 
  1. [Sign up, create an empty project, enable billing, and create a *bucket*](https://cloud.google.com/storage/docs/getting-started-console)
- 2. Under ["Storage" section > "Settings"](https://console.cloud.google.com/project/_/compute/storage/settings) > "Interoperability" tab > click "Enable interoperable access" and then "Create a new key" button and note both *Access Key*	and *Secret*. Also note your *Project Number* (aka project ID, it's a number like 1233457890).
+ 2. Under ["Storage" section > "Settings"](https://console.cloud.google.com/project/_/storage/settings) > "Interoperability" tab > click "Enable interoperable access" and then "Create a new key" button and note both *Access Key*	and *Secret*. Also note your *Project Number* (aka project ID, it's a number like 1233457890).
  3. Run [gcloud's `gsutil config -a`](https://cloud.google.com/storage/docs/getting-started-gsutil) to generate the `~/.boto` configuration file and give it all these info (alternatively you should be able to set environment variable `GS_ACCESS_KEY_ID` and `GS_SECRET_ACCESS_KEY` however in my tries I didn't see where to set your project ID).
  4. You should now have a `~/.boto` looking like:
 
