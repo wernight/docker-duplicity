@@ -60,6 +60,8 @@ To **restore**, you'll need:
   * Keep `.boto` or regenerate it to access your Google Cloud Storage.
   * The `PASSPHRASE` you've used.
 
+Example:
+
     $ docker run --rm --user $UID \
           -e PASSPHRASE=P4ssw0rd \
           -v ~/.boto:/home/duplicity/.boto:ro \
