@@ -25,6 +25,19 @@ In general you...
   * May have to mount a few other files for authentication (see examples below).
 
 
+Example of commands you may want to run **periodically to back up** with good clean-up/maintenance (see below for various storage options):
+
+     $ docker run --rm ... wernight/duplicity --full-if-older-than=6M source_directory target_url
+     $ docker run --rm ... wernight/duplicity remove-older-than 6M --force target_url
+     $ docker run --rm ... wernight/duplicity cleanup --force target_url
+
+This would do:
+
+ 1. A full backup every 6 months so that restoration is a lot faster and for cleanup to work,
+    and incremental backups the rest of the time.
+ 2. Delete backups older than 6 months (doesn't break incremental backups).
+ 3. Delete files from failed sessions (if any).
+
 
 ### Backup to **Google Cloud Storage** example
 
@@ -53,7 +66,7 @@ Now you're ready to perform a **backup**:
           -v ~/.boto:/home/duplicity/.boto:ro \
           -v /:/data:ro \
           wernight/duplicity \
-          duplicity --allow-source-mismatch /data gs://my-bucket-name/some_dir
+          duplicity --full-if-older-than=6M --allow-source-mismatch /data gs://my-bucket-name/some_dir
 
 To **restore**, you'll need:
 
@@ -67,7 +80,7 @@ Example:
           -v ~/.boto:/home/duplicity/.boto:ro \
           -v /:/data:ro \
           wernight/duplicity \
-          duplicity gs://my-bucket-name/some_dir /data
+          duplicity restore gs://my-bucket-name/some_dir /data
           
 See also the [note on Google Cloud Storage](http://duplicity.nongnu.org/duplicity.1.html#sect15).
 
@@ -96,7 +109,7 @@ Now you're ready to perform a **backup**:
           -v $PWD/.gnupg:/home/duplicity/.gnupg \
           -v /:/data:ro \
           wernight/duplicity \
-          duplicity --allow-source-mismatch /data pydrive://duplicity@developer.gserviceaccount.com/some_dir
+          duplicity --full-if-older-than=6M --allow-source-mismatch /data pydrive://duplicity@developer.gserviceaccount.com/some_dir
 
 To **restore**, you'll need:
 
@@ -115,7 +128,9 @@ Supposing you've an **SSH** access to some machine, you can:
           -v ~/.ssh/known_hosts:/etc/ssh/ssh_known_hosts:ro \
           -v /:/data:ro \
           wernight/duplicity \
-          duplicity --allow-source-mismatch --rsync-options='-e "ssh -i /id_rsa"' /data rsync://user@example.com/some_dir
+          duplicity --full-if-older-than=6M --allow-source-mismatch \
+          --rsync-options='-e "ssh -i /id_rsa"' \
+          /data rsync://user@example.com/some_dir
 
 Note: We're running here as `root` to have access to `~/.ssh` and also because ssh does not
 allow to use a random (non-locally existing) UID. To make it safer, you can copy your `~/.ssh`
@@ -123,7 +138,7 @@ and `chown 1896` it (that is `duplicity` UID within the container). If you know 
 the "No user exists for uid" check, please let me know.
 
 
-### Alias
+## Alias
 
 Here is a simple alias that should work in most cases:
 
