@@ -8,6 +8,7 @@ RUN set -x \
         openssl \
         py-crypto \
         py-pip \
+        py-paramiko \
         rsync \
  && update-ca-certificates \
  && pip install pydrive==1.3.1 \
