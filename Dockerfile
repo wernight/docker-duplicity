@@ -6,6 +6,7 @@ RUN set -x \
  && apk add --no-cache \
         ca-certificates \
         duplicity \
+        lftp \
         openssh \
         openssl \
         py-crypto \
