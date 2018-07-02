@@ -1,6 +1,11 @@
-[![](https://images.microbadger.com/badges/image/wernight/duplicity.svg)](https://microbadger.com/images/wernight/duplicity "Get your own image badge on microbadger.com")
+# Supported tags and respective `Dockerfile` links
 
-Dockerized **[duplicity](http://duplicity.nongnu.org/)** backup tool.
+  * [`latest`](https://github.com/wernight/docker-duplicity/blob/master/latest/Dockerfile) [![](https://images.microbadger.com/badges/image/wernight/duplicity.svg)](https://microbadger.com/images/wernight/duplicity "Get your own image badge on microbadger.com")
+  * [`edge`](https://github.com/wernight/docker-duplicity/blob/master/edge/Dockerfile) [![](https://images.microbadger.com/badges/image/wernight/duplicity:edge.svg)](https://microbadger.com/images/wernight/duplicity "Get your own image badge on microbadger.com")
+
+# What is Duplicity?
+
+**[duplicity](http://duplicity.nongnu.org/)** backup tool.
 
 Features of this Docker image:
 
