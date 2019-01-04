@@ -9,6 +9,8 @@ name = "pypi"
 pydrive = "*"
 fasteners = "*"
 "b2" = "*"
+requests = "*"
+requests-oauthlib = "*"
 
 [requires]
 python_version = "2.7"

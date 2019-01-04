@@ -12,6 +12,8 @@ RUN set -x \
         py-crypto \
         py-paramiko \
         py-setuptools \
+        py-requests \
+        py-requests-oauthlib \
         rsync \
  && update-ca-certificates
 
