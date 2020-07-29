@@ -32,9 +32,9 @@ In general you...
 
 Example of commands you may want to run **periodically to back up** with good clean-up/maintenance (see below for various storage options):
 
-     $ docker run --rm ... wernight/duplicity --full-if-older-than=6M source_directory target_url
-     $ docker run --rm ... wernight/duplicity remove-older-than 6M --force target_url
-     $ docker run --rm ... wernight/duplicity cleanup --force target_url
+     $ docker run --rm ... wernight/duplicity duplicity --full-if-older-than=6M source_directory target_url
+     $ docker run --rm ... wernight/duplicity duplicity remove-older-than 6M --force target_url
+     $ docker run --rm ... wernight/duplicity duplicity cleanup --force target_url
 
 This would do:
 
