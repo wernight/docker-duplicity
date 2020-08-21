@@ -5,38 +5,54 @@ ENV HOME=/home/duplicity
 RUN set -x \
  && apk add --no-cache \
         ca-certificates \
-        duplicity \
+        gettext \
+        gnupg \
         lftp \
+        libffi \
+        librsync \
+        libxml2 \
+        libxslt \
         openssh \
         openssl \
-        py3-crypto \
-        py3-paramiko \
-        py3-setuptools \
-        py3-requests \
-        py3-requests-oauthlib \
+        python3 \
+        py3-six \
         rsync \
  && update-ca-certificates
 
 COPY Pipfile Pipfile.lock /
 
 RUN set -x \
-    # Install Python dependencies.
+    # Dependencies to build Python packages.
+ && apk add --no-cache -t .build-deps \
+        gcc \
+        libffi-dev \
+        librsync-dev \
+        libxml2-dev \
+        libxslt-dev \
+        musl-dev \
+        openssl-dev \
+        python3-dev \
+        py3-setuptools \
  && wget https://bootstrap.pypa.io/get-pip.py -O- | python3 - \
- && pip install pipenv \
- && pipenv install --system --deploy --python=$(which python3) \
- && python3 -m pip uninstall -y pip pipenv setuptools
+ && pip install -U setuptools pip pipenv \
+    # Install Python dependencies.
+ && pipenv install --system --deploy \
+    # Clean up
+ && python3 -m pip uninstall -y pip pipenv setuptools \
+ && apk del --purge .build-deps
 
 RUN set -x \
     # Run as non-root user.
  && adduser -D -u 1896 duplicity \
  && mkdir -p /home/duplicity/.cache/duplicity \
  && mkdir -p /home/duplicity/.gnupg \
- && chmod -R go+rwx /home/duplicity/ \
-    # Brief check that it works.
- && su - duplicity -c 'duplicity --version'
+ && chmod -R go+rwx /home/duplicity/
 
 VOLUME ["/home/duplicity/.cache/duplicity", "/home/duplicity/.gnupg"]
 
 USER duplicity
+
+# Brief check that it works.
+RUN duplicity --version
  
 CMD ["duplicity"]

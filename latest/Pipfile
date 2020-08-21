@@ -6,11 +6,34 @@ name = "pypi"
 [dev-packages]
 
 [packages]
-pydrive = "*"
+
+# Main
+duplicity = "*"
+
+# General requirements based on Alpine duplicity package and such.
+# See https://git.launchpad.net/duplicity/tree/requirements.txt
 fasteners = "*"
-"b2" = "*"
+future = "*"
+mock = "*"
+python-gettext = "*"
 requests = "*"
-requests-oauthlib = "*"
+setuptools = "*"
+setuptools_scm = "*"
+urllib3 = "*"
+
+# Required for various backends.
+azure-mgmt-storage = "*"
+b2sdk = "*"
+boto = "*"
+boto3 = "*"
+dropbox = "*"
+gdata = "*"
+jottalib = "*"
+#mediafire = "*"
+pydrive = "*"
+#pyrax = "*"
+python-swiftclient = "*"
+requests_oauthlib = "*"
 
 [requires]
 python_version = "3"
