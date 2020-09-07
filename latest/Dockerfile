@@ -16,6 +16,7 @@ RUN set -x \
         openssl \
         python3 \
         py3-six \
+        py3-paramiko \
         rsync \
  && update-ca-certificates
 
