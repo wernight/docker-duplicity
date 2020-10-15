@@ -55,5 +55,5 @@ USER duplicity
 
 # Brief check that it works.
 RUN duplicity --version
- 
+
 CMD ["duplicity"]
