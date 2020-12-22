@@ -6,10 +6,8 @@ name = "pypi"
 [dev-packages]
 
 [packages]
-
 # Main
 duplicity = "*"
-
 # General requirements based on Alpine duplicity package and such.
 # See https://git.launchpad.net/duplicity/tree/requirements.txt
 fasteners = "*"
@@ -20,7 +18,6 @@ requests = "*"
 setuptools = "*"
 setuptools_scm = "*"
 urllib3 = "*"
-
 # Required for various backends.
 azure-mgmt-storage = "*"
 b2sdk = "*"
@@ -34,6 +31,7 @@ pydrive = "*"
 #pyrax = "*"
 python-swiftclient = "*"
 requests_oauthlib = "*"
+httplib2 = "==0.15.0"
 
 [requires]
 python_version = "3"

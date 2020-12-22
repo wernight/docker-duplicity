@@ -36,10 +36,7 @@ RUN set -x \
  && wget https://bootstrap.pypa.io/get-pip.py -O- | python3 - \
  && pip install -U setuptools pip pipenv \
     # Install Python dependencies.
- && pipenv install --system --deploy \
-    # Clean up
- && python3 -m pip uninstall -y pip pipenv setuptools \
- && apk del --purge .build-deps
+ && pipenv install --system --deploy
 
 RUN set -x \
     # Run as non-root user.
