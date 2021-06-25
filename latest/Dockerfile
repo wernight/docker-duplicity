@@ -16,6 +16,7 @@ RUN set -x \
         openssl \
         python3 \
         py3-six \
+        py3-paramiko \
         rsync \
  && update-ca-certificates
 
@@ -54,5 +55,5 @@ USER duplicity
 
 # Brief check that it works.
 RUN duplicity --version
- 
+
 CMD ["duplicity"]
