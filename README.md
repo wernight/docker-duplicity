@@ -1,6 +1,7 @@
 # Supported tags and respective `Dockerfile` links
 
   * [`latest`](https://github.com/wernight/docker-duplicity/blob/master/latest/Dockerfile) [![](https://images.microbadger.com/badges/image/wernight/duplicity.svg)](https://microbadger.com/images/wernight/duplicity "Get your own image badge on microbadger.com")
+  * [`python2`](https://github.com/wernight/docker-duplicity/blob/master/python2/Dockerfile) [![](https://images.microbadger.com/badges/image/wernight/duplicity.svg)](https://microbadger.com/images/wernight/duplicity "Get your own image badge on microbadger.com")
 
 # What is Duplicity?
 
