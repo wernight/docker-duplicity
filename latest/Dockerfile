@@ -1,4 +1,4 @@
-FROM alpine:3.12
+FROM alpine:3.16
 
 ENV HOME=/home/duplicity
 
@@ -15,7 +15,6 @@ RUN set -x \
         openssh \
         openssl \
         python3 \
-        py3-six \
         py3-paramiko \
         rsync \
  && update-ca-certificates
@@ -33,9 +32,8 @@ RUN set -x \
         musl-dev \
         openssl-dev \
         python3-dev \
-        py3-setuptools \
- && wget https://bootstrap.pypa.io/get-pip.py -O- | python3 - \
- && pip install -U setuptools pip pipenv \
+        py3-pip \
+ && pip install -U pipenv \
     # Install Python dependencies.
  && pipenv install --system --deploy \
     # Clean up

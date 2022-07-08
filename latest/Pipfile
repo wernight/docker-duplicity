@@ -24,7 +24,6 @@ urllib3 = "*"
 # Required for various backends.
 azure-mgmt-storage = "*"
 b2sdk = "*"
-boto = "*"
 boto3 = "*"
 dropbox = "*"
 gdata = "*"
