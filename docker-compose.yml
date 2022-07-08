@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  latest:
+    image: wernight/duplicity:latest
+    build:
+      context: latest
+  python2:
+    image: wernight/duplicity:python2
+    build:
+      context: python2
