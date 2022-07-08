@@ -30,7 +30,7 @@ gdata = "*"
 jottalib = "*"
 #mediafire = "*"
 pydrive = "*"
-#pyrax = "*"
+pyrax = "*"
 python-swiftclient = "*"
 requests_oauthlib = "*"
 
