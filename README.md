@@ -2,7 +2,6 @@
 
   * [`latest`](https://github.com/wernight/docker-duplicity/blob/master/latest/Dockerfile)
   * [`stable`](https://github.com/wernight/docker-duplicity/blob/master/stable/Dockerfile)
-  * [`python2`](https://github.com/wernight/docker-duplicity/blob/master/python2/Dockerfile)
 
 # What is Duplicity?
 

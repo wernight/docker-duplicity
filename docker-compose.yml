@@ -9,7 +9,3 @@ services:
     image: wernight/duplicity:stable
     build:
       context: stable
-  python2:
-    image: wernight/duplicity:python2
-    build:
-      context: python2
