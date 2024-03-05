@@ -5,7 +5,11 @@ services:
     image: wernight/duplicity:latest
     build:
       context: latest
+    volumes:
+      - ./latest:/mnt
+    command: ['duplicity', '--version']
   stable:
     image: wernight/duplicity:stable
     build:
       context: stable
+    command: ['duplicity', '--version']

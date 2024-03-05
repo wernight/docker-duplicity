@@ -1,4 +1,5 @@
-FROM alpine:3.18
+# https://hub.docker.com/_/alpine
+FROM alpine:3.19
 
 ENV HOME=/home/duplicity
 
@@ -14,12 +15,13 @@ RUN set -x \
         libxslt \
         openssh \
         openssl \
+        poetry \
         python3 \
         py3-paramiko \
         rsync \
  && update-ca-certificates
 
-COPY Pipfile Pipfile.lock /
+COPY pyproject.toml poetry.lock /
 
 RUN set -x \
     # Dependencies to build Python packages.
@@ -32,12 +34,9 @@ RUN set -x \
         musl-dev \
         openssl-dev \
         python3-dev \
-        py3-pip \
- && pip install -U pipenv \
     # Install Python dependencies.
- && pipenv install --system --deploy \
+ && poetry install \
     # Clean up
- && python3 -m pip uninstall -y pip pipenv setuptools \
  && apk del --purge .build-deps
 
 RUN set -x \
@@ -52,6 +51,7 @@ VOLUME ["/home/duplicity/.cache/duplicity", "/home/duplicity/.gnupg"]
 USER duplicity
 
 # Brief check that it works.
-RUN duplicity --version
+RUN poetry run duplicity --version
 
+ENTRYPOINT ["poetry", "shell"]
 CMD ["duplicity"]

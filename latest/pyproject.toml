@@ -1,0 +1,35 @@
+[tool.poetry]
+name = "docker-duplicity"
+version = "0.1.0"
+description = "Containerized version of duplicity backup solution."
+authors = ["Werner Beroux"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+duplicity = "*"
+fasteners = "*"
+future = "*"
+mock = "*"
+python-gettext = "*"
+requests = "*"
+setuptools = "*"
+setuptools_scm = "*"
+urllib3 = "*"
+azure-mgmt-storage = "*"
+b2sdk = "*"
+boto3 = "*"
+dropbox = "*"
+gdata = "*"
+jottalib = "*"
+pydrive = "*"
+pyrax = "*"
+python-swiftclient = "*"
+requests_oauthlib = "*"
+
+
+[tool.poetry.group.dev.dependencies]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
