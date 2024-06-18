@@ -2,7 +2,7 @@ FROM alpine:3.19
 
 ENV HOME=/home/duplicity
 
-RUN apk add --no-cache duplicity
+RUN apk add --no-cache duplicity py3-requests-oauthlib
 
 RUN set -x \
     # Run as non-root user.
